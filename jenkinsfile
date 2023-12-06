@@ -20,9 +20,8 @@ pipeline {
             }
             steps {
                 echo 'Logging into $DEV_ENV'
-                withCredentials([usernamePassword(credentialsId: 'dev_apim_admin', usernameVariable: 'DEV_USERNAME', passwordVariable: 'DEV_PASSWORD')]) {
-                    sh 'apictl login admin -u admin -p admin -k'
-                }
+                sh 'apictl login dev -u admin -p admin -k'
+
                 echo 'Deploying to $DEV_ENV'
                 sh 'apictl import-api -f $CURR_DIR$API_DIR -e dev -k --preserve-provider --update --verbose'
             }
